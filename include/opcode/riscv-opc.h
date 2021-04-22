@@ -21,6 +21,8 @@
 #ifndef RISCV_ENCODING_H
 #define RISCV_ENCODING_H
 /* Instruction opcode macros.  */
+#define MATCH_ROUND 0x80000033   // xor with instruction to check if equal 
+#define MASK_ROUND  0xfe00707f // & with instruction to mask variable bits ((insn ^ op->match) & op->mask) == 0
 #define MATCH_SLLI_RV32 0x1013
 #define MASK_SLLI_RV32  0xfe00707f
 #define MATCH_SRLI_RV32 0x5013
@@ -844,6 +846,8 @@
 #define CSR_SCONTEXT 0x7aa
 #endif /* RISCV_ENCODING_H.  */
 #ifdef DECLARE_INSN
+
+DECLARE_INSN(round, MATCH_ROUND, MASK_ROUND)
 DECLARE_INSN(slli_rv32, MATCH_SLLI_RV32, MASK_SLLI_RV32)
 DECLARE_INSN(srli_rv32, MATCH_SRLI_RV32, MASK_SRLI_RV32)
 DECLARE_INSN(srai_rv32, MATCH_SRAI_RV32, MASK_SRAI_RV32)
